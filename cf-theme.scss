@@ -1,0 +1,297 @@
+/*-- scss:defaults --*/
+
+// ---- palette: stochastic-process blueprint --------------------------------
+$ink:        #1b2530;   // text
+$slate:      #33475e;   // primary structural
+$slate-deep: #1f2d3d;   // divider backgrounds
+$blueprint:  #3f5d78;   // graph strokes / structure accent
+$gold:       #c0892c;   // single warm accent — used sparingly
+$gold-soft:  #e7d3a6;
+$covid:      #8c3b4a;   // garnet  COVID-19 series
+$flu:        #2f6b86;   // steel   influenza series
+$muted:      #6a7682;
+$paper:      #ffffff;
+$wash:       #f3f5f7;   // cool card tint
+$wash-warm:  #f7f4ec;   // faint gold wash for key cards
+$rule:       #dde3e8;
+
+// ---- reveal variable overrides ------------------------------------------
+$body-bg:      $paper;
+$body-color:   $ink;
+$link-color:   $slate;
+$selection-bg: rgba($gold, .22);
+
+$font-family-sans-serif: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+$presentation-font-size-root:      29px;
+$presentation-heading-font:        "Source Serif 4", Georgia, serif;
+$presentation-heading-color:       $slate-deep;
+$presentation-heading-font-weight: 600;
+$presentation-h1-font-size:        2.0em;
+$presentation-h2-font-size:        1.5em;
+$presentation-h3-font-size:        1.12em;
+$code-block-font-size:             0.7em;
+
+/*-- scss:rules --*/
+
+.reveal { letter-spacing: -0.003em; }
+.reveal .slides { text-align: left; }
+
+// ---------- headings: serif + thin gold rule ------------------------------
+.reveal .slides section h2 {
+  font-family: "Source Serif 4", Georgia, serif;
+  position: relative;
+  padding-bottom: .26em;
+  margin-bottom: .5em;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+.reveal .slides section h2::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  width: 64px; height: 3px; background: $gold; border-radius: 2px;
+}
+.reveal h1, .reveal h2, .reveal h3 { font-family: "Source Serif 4", Georgia, serif; }
+.reveal h3 { color: $slate; font-weight: 600; }
+
+.reveal p, .reveal li { line-height: 1.34; }
+.reveal strong { color: $slate-deep; font-weight: 600; }
+.reveal em { color: $gold; font-style: italic; font-weight: 500; }
+
+// ---------- eyebrow (mono section label, top of slide) --------------------
+.reveal .eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .5em; font-weight: 500; letter-spacing: .14em;
+  text-transform: uppercase; color: $muted;
+  margin: 0 0 .15em; display: block;
+}
+.reveal .eyebrow .b { color: $gold; }
+
+// ---------- lists ---------------------------------------------------------
+.reveal ul { list-style: none; margin-left: 0; }
+.reveal ul li { position: relative; padding-left: 1.1em; margin-bottom: .4em; }
+.reveal ul li::before {
+  content: ""; position: absolute; left: 0; top: .58em;
+  width: .46em; height: .46em; border: 1.5px solid $gold; border-radius: 1px;
+  transform: rotate(45deg);
+}
+.reveal ul ul li::before { border-color: $blueprint; width:.34em; height:.34em; top:.6em; }
+
+// ---------- footer + slide number ----------------------------------------
+.reveal .footer { color: $muted; font-size: 12px; font-weight: 500;
+  font-family:"IBM Plex Mono", monospace; letter-spacing:.02em; }
+.reveal .slide-number { background: transparent; color: $muted; font-weight: 600;
+  font-family:"IBM Plex Mono", monospace; }
+
+// ---------- title slide ---------------------------------------------------
+#title-slide { text-align: left; }
+#title-slide .title {
+  font-family:"Source Serif 4", serif;
+  color: $slate-deep; font-size: 1.95em; font-weight: 700;
+  line-height: 1.05; margin-bottom: .25em; letter-spacing:-.012em;
+}
+#title-slide .subtitle {
+  font-family:"IBM Plex Sans", sans-serif;
+  color: $slate; font-size: .92em; font-weight: 500; line-height: 1.3;
+  margin-bottom: 1.0em; border-left: 3px solid $gold; padding-left: .7em;
+}
+#title-slide .author, #title-slide .quarto-title-authors {
+  color: $ink; font-size: .58em; font-weight: 500; line-height: 1.45; }
+#title-slide .institute, #title-slide .quarto-title-affiliation {
+  color: $muted; font-size: .48em; font-weight: 400; line-height: 1.45; }
+#title-slide .date {
+  font-family:"IBM Plex Mono", monospace;
+  color: $gold; font-size: .5em; margin-top: .9em; letter-spacing:.06em; }
+
+// ---------- stat blocks ---------------------------------------------------
+.stat-row { display: flex; gap: 1rem; align-items: stretch; margin: .25em 0 .45em; }
+.stat {
+  flex: 1; background: $wash; border-radius: 4px;
+  padding: .65rem .8rem; border: 1px solid $rule; border-left: 3px solid $slate;
+}
+.stat .num { font-family:"IBM Plex Mono", monospace;
+  font-size: 1.7em; font-weight: 600; color: $slate-deep; line-height: 1; }
+.stat .lab { font-size: .54em; color: $muted; font-weight: 500; margin-top: .4em;
+  text-transform: uppercase; letter-spacing: .04em; }
+.stat.covid  { border-left-color: $covid; } .stat.covid  .num { color: $covid; }
+.stat.flu    { border-left-color: $flu; }   .stat.flu    .num { color: $flu; }
+.stat.accent { border-left-color: $gold; }  .stat.accent .num { color: $gold; }
+
+// ---------- pills ---------------------------------------------------------
+.pill { display:inline-block; padding:.05em .5em; border-radius:3px;
+  font-family:"IBM Plex Mono", monospace;
+  font-size:1em; font-weight:600; letter-spacing:.02em; vertical-align:middle; }
+.pill.covid { background: rgba(140, 59, 74, 0.06); color:$covid; }
+.pill.flu   { background: rgba(47, 107, 134, 0.06);  color:$flu; }
+
+// ---------- numbered decision marker --------------------------------------
+.dchip {
+  display:inline-flex; align-items:center; gap:.5em;
+  font-family:"IBM Plex Mono", monospace; font-size:.6em; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase; color:$gold; margin-bottom:.2em;
+}
+.dchip .n {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:1.7em; height:1.7em; border:1.5px solid $gold; border-radius:50%;
+  color:$gold; font-weight:600;
+}
+
+// ---------- key takeaway --------------------------------------------------
+.key {
+  background: $wash-warm; border-left: 4px solid $gold; border-radius: 0 4px 4px 0;
+  padding: .5em .85em; margin: .35em 0; font-size: .9em;
+}
+.key strong { color: #92671c; }
+
+// ---------- math / definition card ----------------------------------------
+.reveal .mathcard {
+  background: $wash; border: 1px solid $rule; border-left: 4px solid $blueprint;
+  border-radius: 0 4px 4px 0; padding: .35em .9em; margin: .35em 0;
+}
+.reveal .mathcard.gold  { border-left-color: $gold; }
+.reveal .mathcard.covid { border-left-color: $covid; }
+.reveal .gloss { font-family:"IBM Plex Mono", monospace; font-size: .66em;
+  color: $muted; line-height: 1.4; }
+.reveal .gloss strong { color: $slate-deep; }
+
+.muted { color: $muted; }
+.small { font-size: .82em; }
+.smaller { }
+.tiny  { font-size: .6em; color: $muted; }
+.dim { color: $muted; }
+.mono { font-family:"IBM Plex Mono", monospace; }
+
+// ---------- tables --------------------------------------------------------
+.reveal table { font-size: .7em; border-collapse: collapse; margin: .3em 0; }
+.reveal table thead th {
+  background: $slate-deep; color: #fff; font-weight: 500;
+  font-family:"IBM Plex Sans"; border: none; padding: .34em .6em; text-align: left;
+}
+.reveal table td { border: none; border-bottom: 1px solid $rule; padding: .3em .6em; }
+.reveal table tbody tr:nth-child(even) { background: $wash; }
+.reveal .smaller table { font-size: .58em; }
+.reveal table .mono, .reveal td.mono { font-family:"IBM Plex Mono", monospace; }
+
+// ---------- two-column helpers -------------------------------------------
+.reveal .columns { align-items: flex-start; }
+
+// ---------- caption -------------------------------------------------------
+.cap { font-family:"IBM Plex Mono", monospace; font-size: .54em; color: $muted;
+  text-align: left; margin-top: .25em; letter-spacing:.01em; }
+
+// ---------- code ----------------------------------------------------------
+.reveal pre { box-shadow: none; }
+.reveal pre code { border-radius: 4px; border:1px solid $rule; background:$wash; }
+.reveal code { color: $slate-deep; font-family:"IBM Plex Mono", monospace; }
+
+// ---------- links ---------------------------------------------------------
+.reveal a { color: $slate; text-decoration: none; border-bottom: 1px solid rgba($slate,.3); }
+.reveal a:hover { color: $gold; border-bottom-color: $gold; }
+
+// ---------- references ----------------------------------------------------
+.reveal .ref { font-family:"IBM Plex Mono", monospace; font-size: 0.8em;
+  color: $muted; font-weight: 500; letter-spacing:.01em; }
+
+// ---------- section divider slides ---------------------------------------
+.reveal section.divider {
+  background-color: $slate-deep;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+.reveal section.divider h1, .reveal section.divider h2 { color:#fff; }
+.reveal section.divider h2::after { background:$gold; }
+.reveal section.divider p, .reveal section.divider li { color:#d8e0e7; }
+.reveal section.divider .eyebrow { color:$gold-soft; }
+.reveal section.divider .roadmap li::before { border-color:$gold-soft; }
+.reveal section.divider .roadmap { font-size:.92em; }
+.reveal section.divider a { color:$gold-soft; border-bottom-color:rgba($gold-soft,.4); }
+.reveal section.divider .lead {
+  font-family:"Source Serif 4", serif; font-size:1.15em; font-weight:400;
+  font-style:italic; color:#eef2f5; line-height:1.4; max-width:80%;
+}
+
+// ---------- math sizing ---------------------------------------------------
+.reveal .mjx-chtml, .reveal mjx-container { color: $ink; }
+.reveal section mjx-container[display="true"] { font-size: .96em; margin:.3em 0; }
+
+// ---------- discussion list (open problems) ------------------------------
+.reveal .qlist li { margin-bottom:.55em; }
+.reveal .qlist li::before { border-color:$covid; }
+
+// ---------- panel-tabset --------------------------------------------------
+.reveal .panel-tabset [role="tablist"] { border-bottom: 1px solid $rule; gap:.2em; }
+.reveal .panel-tabset [role="tab"] {
+  font-family:"IBM Plex Mono", monospace; font-size:.6em; font-weight:500;
+  letter-spacing:.04em; text-transform:uppercase; color:$muted;
+  border:none; border-bottom:2px solid transparent; padding:.3em .8em;
+}
+.reveal .panel-tabset [role="tab"][aria-selected="true"] {
+  color:$slate-deep; border-bottom-color:$gold;
+}
+
+// ---------- agenda / index ------------------------------------------------
+.agenda { list-style:none; margin:.3em 0 0; padding:0; }
+.agenda li {
+  position:relative; padding:.42em 0 .42em 2.6em;
+  border-bottom:1px solid $rule; font-size:1.0em; font-weight:500; color:$slate-deep;
+}
+.agenda li::before {
+  content: attr(data-n); position:absolute; left:0; top:.42em;
+  font-family:"IBM Plex Mono", monospace; font-size:.8em; font-weight:600;
+  color:$gold; border:none; width:auto; height:auto; transform:none;
+}
+.agenda li .sub { color:$muted; font-weight:400; font-size:.78em; }
+
+// ---------- flow node label ----------------------------------------------
+.reveal .lead-q { font-family:"Source Serif 4", serif; font-style:italic;
+  color:$slate; font-size:1.05em; }
+
+
+// Objectives / any ordered list: keep native markers, kill the injected counter
+.reveal ol { list-style: decimal outside; }
+.reveal ol > li::before { content: none !important; }
+
+// Unordered lists: keep native bullet, suppress the duplicate themed bullet
+/* one bullet per item, at any depth — native off everywhere, themed ::before on */
+/* one bullet per item at any depth — native off, themed diamond ::before on */
+.reveal ul:not(.agenda),
+.reveal ul:not(.agenda) ul { list-style: none !important; }
+
+.reveal ul:not(.agenda) > li { position: relative; padding-left: 1.1em; }
+.reveal ul:not(.agenda) > li::before {
+  content: "" !important;
+  position: absolute; left: 0; top: .55em;
+  width: .34em; height: .34em;
+  background: $gold;              /* diamond colour */
+  transform: rotate(45deg);      /* square → diamond; NO border-radius */
+}
+
+// ---------- about-me timeline --------------------------------------------
+.reveal .tl {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1em;
+  position: relative; margin-top: 1.3em; padding-top: 1.2em;
+}
+.reveal .tl::before {
+  content: ""; position: absolute; left: .45em; right: 0; top: .42em;
+  height: 2px; background: $rule;
+}
+.reveal .tl-item { position: relative; }
+.reveal .tl-dot {
+  position: absolute; top: -1.2em; left: 0;
+  width: .85em; height: .85em; border-radius: 50%;
+  background: $paper; border: 2.5px solid $slate;
+}
+.reveal .tl-item.now .tl-dot { background: $gold; border-color: $gold; box-shadow: 0 0 0 5px rgba($gold, .18); }
+.reveal .tl-when {
+  font-family: "IBM Plex Mono", monospace; font-size: .55em; font-weight: 600;
+  letter-spacing: .06em; color: $muted; text-transform: uppercase; margin-top: .3em;
+}
+.reveal .tl-item.now .tl-when { color: $gold; }
+.reveal .tl-what { font-family: "Source Serif 4", Georgia, serif; font-size: .82em;
+  font-weight: 600; color: $slate-deep; line-height: 1.2; margin-top: .25em; }
+.reveal .tl-where { font-size: .58em; color: $muted; line-height: 1.35; margin-top: .3em; }
+.reveal .tl-tag { display: inline-block; font-family: "IBM Plex Mono", monospace;
+  font-size: .55em; font-weight: 600; color: #92671c; background: $wash-warm;
+  border: 1px solid $gold-soft; border-radius: 3px; padding: .05em .4em; vertical-align: middle; }
